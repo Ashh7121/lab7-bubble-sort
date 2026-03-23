@@ -17,3 +17,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:57
 - **Prompt**: Add a JOURNAL.md entry: created test_main.py for bubble_sort with unittest cases. Include timestamp, summary, and note code changes made.
 
+### 23-03-2026 11:59
+- **Prompt**: I would like to visualise the sorting as it is happening. First, i would like to explore a terminal based approach. What do you suggest?
+
