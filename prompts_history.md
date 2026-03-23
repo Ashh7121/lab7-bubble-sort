@@ -11,3 +11,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:47
 - **Prompt**: Look at main.py and explain to me why on line 5, we have to do n - i - 1. I know it's the correct implementation but I want to know the logic
 
+### 23-03-2026 11:57
+- **Prompt**: can you make me a test file for my bubble sort on main.py?
+
