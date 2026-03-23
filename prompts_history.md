@@ -14,3 +14,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:57
 - **Prompt**: can you make me a test file for my bubble sort on main.py?
 
+### 23-03-2026 11:57
+- **Prompt**: Add a JOURNAL.md entry: created test_main.py for bubble_sort with unittest cases. Include timestamp, summary, and note code changes made.
+
