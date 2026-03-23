@@ -26,3 +26,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 12:04
 - **Prompt**: I am interested in the In-place redraw option. Help me implement this. Create the stubs and todos in main.py
 
+### 23-03-2026 12:04
+- **Prompt**: Journal entry: updated main.py with visualization stubs and TODOs for in-place redraw (clear_console, print_bubble_state, bubble_sort_visual).
+
