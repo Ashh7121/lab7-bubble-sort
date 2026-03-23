@@ -23,3 +23,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:59
 - **Prompt**: Journal entry: advised terminal visualization approach for bubble sort (step-by-step prints, curses option, or rich lib), no code edits yet.
 
+### 23-03-2026 12:04
+- **Prompt**: I am interested in the In-place redraw option. Help me implement this. Create the stubs and todos in main.py
+
