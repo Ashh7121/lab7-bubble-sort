@@ -20,3 +20,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 11:59
 - **Prompt**: I would like to visualise the sorting as it is happening. First, i would like to explore a terminal based approach. What do you suggest?
 
+### 23-03-2026 11:59
+- **Prompt**: Journal entry: advised terminal visualization approach for bubble sort (step-by-step prints, curses option, or rich lib), no code edits yet.
+
