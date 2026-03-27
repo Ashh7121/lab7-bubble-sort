@@ -47,3 +47,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 19:23
 - **Prompt**: make me a readme.md file. it should be well detailed
 
+### 27-03-2026 19:24
+- **Prompt**: Please log the following interaction to JOURNAL.md:  **Timestamp**: March 27, 2026 (current date) **User**: ashneel-girivar.bhagoban@epita.fr **Prompt**: "make me a readme.md file. it should be well detailed" **CoPilot Mode**: Edit **CoPilot Model**: Claude Haiku 4.5 **Socratic Mode**: OFF **Changes Made**: Created comprehensive README.md file (500+ lines) with detailed documentation covering project overview, features, requirements, installation, usage, algorithm explanation, code architecture, configuration options, troubleshooting, and learning outcomes. **Context and Reasons for Changes**: User requested a detailed README to document the Bubble Sort Visualizer project. The README covers all aspects of the guibubblesort.py program including visual features (color-coded bars, animation), technical architecture (SortVisualizer class, state management), algorithm explanation with examples, configuration guidelines, and learning outcomes for educational purposes.
+
