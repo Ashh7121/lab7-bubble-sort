@@ -44,3 +44,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 18:32
 - **Prompt**: Are you logging everything in the journal?
 
+### 27-03-2026 19:23
+- **Prompt**: make me a readme.md file. it should be well detailed
+
