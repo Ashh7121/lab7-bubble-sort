@@ -29,3 +29,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 23-03-2026 12:04
 - **Prompt**: Journal entry: updated main.py with visualization stubs and TODOs for in-place redraw (clear_console, print_bubble_state, bubble_sort_visual).
 
+### 27-03-2026 13:50
+- **Prompt**: How do I effectively use tkinter to implement a visual bubble sort?
+
