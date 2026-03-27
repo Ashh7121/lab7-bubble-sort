@@ -1,133 +1,121 @@
-import tkinter as tk
+import pygame
 import random
+import sys
 
 # Config
 WIDTH = 800
 HEIGHT = 400
 BAR_COUNT = 30
 
-COMPARE_DELAY = 60   # slower comparisons
-SWAP_DELAY = 100      # longer pause for swaps
+COMPARE_DELAY = 60    
+SWAP_DELAY = 100
+
+pygame.init()
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Bubble Sort Visualizer (Pygame)")
+clock = pygame.time.Clock()
 
 
 class SortVisualizer:
-    def __init__(self, root):
-        self.root = root
-        self.root.title("Bubble Sort Visualizer")
-
-        self.canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg="black")
-        self.canvas.pack()
-
+    def __init__(self):
         self.arr = [random.randint(10, 100) for _ in range(BAR_COUNT)]
         self.bar_width = WIDTH / BAR_COUNT
-
-        self.rects = []
-        self.draw_bars()
 
         self.i = 0
         self.j = 0
         self.swapping = False
 
-        self.root.after(500, self.bubble_step)
+        self.last_time = pygame.time.get_ticks()
+        self.delay = COMPARE_DELAY
+
+        self.highlight = (-1, -1, "white")  # (index1, index2, color)
 
     def draw_bars(self):
-        self.canvas.delete("all")
-        self.rects = []
-
+        screen.fill((0, 0, 0))
         max_val = max(self.arr)
 
         for i, val in enumerate(self.arr):
-            x0 = i * self.bar_width
-            y0 = HEIGHT - (val / max_val) * HEIGHT
-            x1 = (i + 1) * self.bar_width
-            y1 = HEIGHT
+            x = i * self.bar_width
+            height = (val / max_val) * HEIGHT
+            y = HEIGHT - height
 
-            rect = self.canvas.create_rectangle(
-                x0, y0, x1, y1,
-                fill="white",
-                outline="black"
-            )
-            self.rects.append(rect)
+            color = (255, 255, 255)
 
-    def update_bar(self, index, color="white"):
-        val = self.arr[index]
-        max_val = max(self.arr)
+            if i == self.highlight[0] or i == self.highlight[1]:
+                if self.highlight[2] == "blue":
+                    color = (0, 150, 255)
+                elif self.highlight[2] == "red":
+                    color = (255, 50, 50)
+                elif self.highlight[2] == "cyan":
+                    color = (0, 255, 255)
+                elif self.highlight[2] == "green":
+                    color = (0, 255, 0)
 
-        x0 = index * self.bar_width
-        y0 = HEIGHT - (val / max_val) * HEIGHT
-        x1 = (index + 1) * self.bar_width
-        y1 = HEIGHT
+            pygame.draw.rect(screen, color, (x, y, self.bar_width, height))
 
-        self.canvas.coords(self.rects[index], x0, y0, x1, y1)
-        self.canvas.itemconfig(self.rects[index], fill=color)
+        pygame.display.flip()
 
-    def swap_animation(self, j):
-        """Make swap very obvious: red → pause → swap → update"""
-        # Step 1: highlight in red
-        self.update_bar(j, "red")
-        self.update_bar(j + 1, "red")
+    def step(self):
+        now = pygame.time.get_ticks()
 
-        def do_swap():
-            # Step 2: swap values
-            self.arr[j], self.arr[j + 1] = self.arr[j + 1], self.arr[j]
-
-            # Step 3: update bars visually
-            self.update_bar(j, "cyan")
-            self.update_bar(j + 1, "cyan")
-
-            # Step 4: reset after short delay
-            self.root.after(SWAP_DELAY, lambda: self.reset_after_swap(j))
-
-        self.root.after(SWAP_DELAY, do_swap)
-
-    def reset_after_swap(self, j):
-        self.update_bar(j, "white")
-        self.update_bar(j + 1, "white")
-
-        self.j += 1
-        self.swapping = False
-        self.root.after(COMPARE_DELAY, self.bubble_step)
-
-    def bubble_step(self):
-        if self.swapping:
+        if now - self.last_time < self.delay:
             return
+
+        self.last_time = now
 
         n = len(self.arr)
 
+        if self.swapping:
+            return
+
         if self.i < n:
             if self.j < n - self.i - 1:
-                self.update_bar(self.j, "blue")
-                self.update_bar(self.j + 1, "blue")
+                # Highlight comparison
+                self.highlight = (self.j, self.j + 1, "blue")
+                self.delay = COMPARE_DELAY
 
                 if self.arr[self.j] > self.arr[self.j + 1]:
                     self.swapping = True
-                    self.swap_animation(self.j)
+                    self.highlight = (self.j, self.j + 1, "red")
+                    pygame.time.set_timer(pygame.USEREVENT, SWAP_DELAY)
                 else:
-                    # Reset if no swap
-                    self.root.after(
-                        COMPARE_DELAY,
-                        lambda: self.reset_no_swap()
-                    )
+                    self.j += 1
             else:
                 self.j = 0
                 self.i += 1
-                self.root.after(COMPARE_DELAY, self.bubble_step)
-
         else:
-            self.finish()
+            self.highlight = (-1, -1, "green")
 
-    def reset_no_swap(self):
-        self.update_bar(self.j, "white")
-        self.update_bar(self.j + 1, "white")
+    def handle_swap(self):
+        # Perform swap
+        self.arr[self.j], self.arr[self.j + 1] = self.arr[self.j + 1], self.arr[self.j]
+        self.highlight = (self.j, self.j + 1, "cyan")
+
         self.j += 1
-        self.root.after(COMPARE_DELAY, self.bubble_step)
+        self.swapping = False
+        pygame.time.set_timer(pygame.USEREVENT, 0)
 
-    def finish(self):
-        for i in range(len(self.arr)):
-            self.update_bar(i, "lime")
+
+def main():
+    visualizer = SortVisualizer()
+
+    running = True
+    while running:
+        clock.tick(60)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            elif event.type == pygame.USEREVENT:
+                visualizer.handle_swap()
+
+        visualizer.step()
+        visualizer.draw_bars()
+
+    pygame.quit()
+    sys.exit()
 
 
 if __name__ == "__main__":
-    root = tk.Tk()
-    app = SortVisualizer(root)
-    root.mainloop()
+    main()
