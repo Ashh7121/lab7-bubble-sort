@@ -35,3 +35,6 @@ Automatically captured prompt log. Entries are appended in chronological order (
 ### 27-03-2026 17:49
 - **Prompt**: 1. There is a nested loop that goes through the list and swaps values according to the criterion. It goes through the list n - i - 1 times. 2. I have used very basic tkinter. I'm talking buttons, windows, chatboxes. 3. I want to implement bars with different heights and changes colour dynamically as the bars are swapped. 4. Delay to show the movement. 5. Just a prompt to start the process
 
+### 27-03-2026 18:31
+- **Prompt**: Can you make me a test file tests.py for the guibubblesort.py program? Simple tests to test the code
+
